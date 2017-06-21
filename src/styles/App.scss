@@ -25,6 +25,59 @@ html, body {
       height: 680px;
       overflow: hidden;
       background-color: #ddd;
+      perspective: 1800px;
+      @at-root {
+        .img-figure{
+            position: absolute;
+            width: 320px;
+            height: 380px;
+            margin: 0px;
+            padding: 40px ;
+            box-sizing: border-box;
+            background-color:  #fff;
+            cursor: pointer;
+            transform-style:  preserve-3d;
+            transform-origin: 0 50% 0;
+            transition: left .6s ease-in-out, top .6s ease-in-out, transform .6s;
+            &.isinverse{
+              transform: translate(320px) rotateY(180deg);
+            }
+         }
+         figcaption{
+           text-align: center;
+           .img-title{
+             margin: 15px 0 0 0;
+             color: #a7a0a2;
+             font-size: 20px;
+           }
+           .img-back{
+              position: absolute;
+              top: 0;
+              left: 0;
+
+              width: 100%;
+              height: 100%;
+
+              padding: 50px 40px;
+              overflow: auto;
+
+              color: #a7a0a2;
+              font-size: 22px;
+              line-height: 1.25;
+              text-align: center;
+              background-color: #fff;
+              box-sizing: border-box;
+
+              /*先开始时.img-back，旋转了180度，因为translateZ(1px)，位于正面图像的下方*/
+              /*当.img-figure旋转时，.img-back又旋转了180度，旋转度数为360,因为translateZ(1px)，位于正面图像的上方*/
+              transform: rotateY(180deg) translateZ(1px);
+              /*translateZ(1px) 是为了解决Safari 的bug*/
+              backface-visibility: hidden;
+            }
+
+         }
+      }
+      
 }
 /* image -- end */
 
